@@ -8,6 +8,26 @@ def login(req):
     if req.method== 'GET':
         return render(req, 'login.html')
     elif req.method == 'POST':
+        username = req.POST.get('username', None)
+        useremail = req.POST.get('useremail', None)
+
+        err = {}
+
+        if not (useremail and username) :
+            err['err'] = '유효성이 잘못되었습니다.'
+            return render(req, 'login.html', err)
+
+        # username = req.POST.get('username', None)
+        # email = req.POST.get('password', None)
+
+        # err = {}
+        # if not(username and email) : 
+        #     err['err'] ='비밀번호 오류'
+        #     return  render(req, 'login.html', err)
+        # else :
+            ## db read
+            ## session 만들기
+
         return redirect('/')
 
 def index(req):
