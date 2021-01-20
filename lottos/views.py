@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.http.response import HttpResponse
 import random
 
+def login_after(req):
+    return HttpResponse("세션읽기 & 세션 없으면 리다이렉션")
+
 # Create your views here.
 def index(req):
     num = req.GET.get('num', '')

@@ -2,6 +2,22 @@ from django.shortcuts import render, redirect
 from django.http.response import HttpResponse
 from .models import Members
 
+
+def login_after(req):
+    user_id = req.session.get('user')
+
+    if user_id:
+        return HttpResponse(f"로그인 유저 {user_id}")
+
+    return redirect("/login")
+
+def logout(req):
+    if req.session.get('user'):
+        del(req.session['user'])
+
+    return redirect("/")
+
+
 # Create your views here.
 def login(req):
     print(dir(req))
@@ -22,6 +38,9 @@ def login(req):
             if useremail == member.useremail :
                 req.session['user'] = member.id
                 return redirect('/members')
+            else:
+                err['err'] = "비밀번호가 잘못되었습니다."
+                return render(req, "login.html", err)
 
             return HttpResponse(f"<h1>{member.useremail}</h1>")
         # username = req.POST.get('username', None)
