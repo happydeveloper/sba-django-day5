@@ -8,7 +8,7 @@ def index(req):
     print(req.GET.get('id',''))
     num = req.GET.get('id','') 
     if len(num) < 1:
-        return HttpResponse("<h1>dynamic page</h1>")
+        return HttpResponse("<h1>version 1 : dynamic page</h1>")
 
     return HttpResponse(f"<h2> 구구단 : {gugu(num)}</h2>")
 
