@@ -1,18 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http.response import HttpResponse
 from .models import Members
 
 # Create your views here.
-def gu(req):
-    num = req.GET.get('num', '')
-    
-    return HttpResponse(f"<h1> gugu : {num_gugu(num)} </h1>")
-
-def num_gugu(num):
-    str = ""
-    for i in range(9):
-        str += f"{int(num)} * {i+1} = {int(num) * (i+1)} <br>" 
-    return str
+def login(req):
+    print(dir(req))
+    if req.method== 'GET':
+        return render(req, 'login.html')
+    elif req.method == 'POST':
+        return redirect('/')
 
 def index(req):
     #print(dir(req))
